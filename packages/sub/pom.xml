@@ -23,14 +23,75 @@
 		<maven.compiler.source>1.7</maven.compiler.source>
 		<maven.compiler.target>1.7</maven.compiler.target>
    		<cloud.function.context.version>3.1.0</cloud.function.context.version>
-    		<log4j.version>2.14.0</log4j.version>
+    		<log4j.version>2.25.5</log4j.version>
   	</properties>
+
+	<repositories>
+		<repository>
+			<id>aikido-maven</id>
+			<url>https://maven.aikido.io/b6b7219dae019f5710c</url>
+			<releases><enabled>true</enabled></releases>
+			<snapshots><enabled>false</enabled></snapshots>
+		</repository>
+	</repositories>
+
+	<dependencyManagement>
+		<dependencies>
+			<!-- Log4j BOM: pins all log4j artifacts to 2.25.5 (fixes CVE-2021-44228, CVE-2021-45046, CVE-2021-45105, CVE-2021-44832, CVE-2026-34480, CVE-2026-34477, CVE-2025-68161, CVE-2025-52999 (log4j), AIKIDO-2026-30627, CVE-2026-49844) -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-bom</artifactId>
+				<version>${log4j.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- Jackson BOM: pins jackson-core and jackson-databind to 2.18.9 (fixes CVE-2025-52999, GHSA-r7wm-3cxj-wff9, CVE-2025-49128, CVE-2026-54512, CVE-2026-54513, CVE-2020-36518, CVE-2021-46877, CVE-2022-42003, CVE-2022-42004, CVE-2026-54515, CVE-2026-54514, CVE-2026-50193) -->
+			<dependency>
+				<groupId>com.fasterxml.jackson</groupId>
+				<artifactId>jackson-bom</artifactId>
+				<version>2.18.9</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!-- Spring TuxCare backport pins (fixes AIKIDO-2026-11158, AIKIDO-2026-10571, AIKIDO-2024-10363, CVE-2025-41249) -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>5.3.39-tuxcare.17</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>5.3.39-tuxcare.17</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>5.3.39-tuxcare.17</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-expression</artifactId>
+				<version>5.3.39-tuxcare.17</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>5.3.39-tuxcare.17</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>5.3.39-tuxcare.17</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
   	<dependencies>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.12.4</version>
+			<version>2.18.9</version>
 		</dependency>
 	    	<dependency>
 			<groupId>org.apache.logging.log4j</groupId>
@@ -40,12 +101,12 @@
 	    	<dependency>
 		      <groupId>org.apache.commons</groupId>
 		      <artifactId>commons-compress</artifactId>
-		      <version>1.20</version>
+		      <version>1.28.0</version>
 	    	</dependency>
 	    	<dependency>
 		      <groupId>org.springframework</groupId>
 		      <artifactId>spring-core</artifactId>
-		      <version>5.3.0</version>
+		      <version>5.3.39-tuxcare.17</version>
 	    	</dependency>
 	</dependencies>
 	
